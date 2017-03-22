@@ -17,11 +17,18 @@ var inline_src = (<><![CDATA[
     /* jshint esnext: false */
     /* jshint esversion: 6 */
 
-    // Your code here...
     let showCreateGameAtBottom = false;
 
     $('div.aside').remove();
     $('div.article').css('width', '100%');
+
+    $("div#content h1").css("display", "inline-block");
+
+    $("div#content h1").text('发现感兴趣的游戏（增强版）');
+    $( "<a>意见反馈</a>" ).insertAfter( "div#content h1" );
+    $( "<a>使用指南</a>" ).insertAfter( "div#content h1" );
+    $("div#content a").css("margin-right", "1em");
+
 
     // Atari 2600 = 40
     // Browser = 140
