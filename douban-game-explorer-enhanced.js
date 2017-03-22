@@ -18,6 +18,8 @@ var inline_src = (<><![CDATA[
     /* jshint esversion: 6 */
 
     // Your code here...
+    let showCreateGameAtBottom = false;
+
     $('div.aside').remove();
     $('div.article').css('width', '100%');
 
@@ -53,8 +55,25 @@ var inline_src = (<><![CDATA[
     $('form.filters fieldset:eq(1) div.filter-options label.is-active a').each((idx, unselect) => unselect.click());
 
     // Automatically Click for More
+    let loadMore = [];
     $(window).scroll(function() {
-      $("div.game-pagination div a")[0].click();
+      loadMore = $("div.game-pagination div a");
+      if(loadMore && loadMore[0]) {
+        loadMore[0].click();
+      }
+
+      if(loadMore && !loadMore[0] && !showCreateGameAtBottom) {
+          let searchKeyword = $("div.searcher input[type='text']")[0].value;
+          let thingName = '';
+          if(searchKeyword) {
+              thingName = "?thing_name=" + encodeURIComponent(searchKeyword);
+          }
+
+      $("div.game-list ul").append('<li style="text-align:center">没找到想要的游戏？ &gt; <a href="/game/create' + thingName + '" title="创建游戏条目" target="_blank">创建游戏条目</a></li>');
+      showCreateGameAtBottom = true;
+
+          //https://www.douban.com/game/create?thing_name=xasdljsakdj
+      }
     });
 
 /* jshint ignore:start */
