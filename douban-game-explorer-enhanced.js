@@ -20,7 +20,7 @@ var inline_src = (<><![CDATA[
     // Your code here...
     $('div.aside').remove();
     $('div.article').css('width', '100%');
-    
+
     // Atari 2600 = 40
     // Browser = 140
     // Windows Phone = 124
@@ -36,22 +36,27 @@ var inline_src = (<><![CDATA[
     // TurboGrafx-16 = 55
     // TurboGrafx-CD = 53
     // Sega CD = 29
-    
+
     // 双摇杆射击 = 31
     // 大型多人在线 = 16
     // 文字冒险 = 36
     // 动作冒险 = 43
-    
+
     var genres = url('?').genres;
     if (genres === undefined || genres === null || genres === '') {
         window.location = '/game/explore?genres=' + '31,16,36,43' + '&platforms=40,140,124,109,30,14,8,55,53,29,159,15,5';
-    }    
+    }
     // Unselect those new genres
     $('form.filters fieldset:first div.filter-options label.is-active a').each((idx, unselect) => unselect.click());
-    
+
     // Unselect those new platforms
     $('form.filters fieldset:eq(1) div.filter-options label.is-active a').each((idx, unselect) => unselect.click());
-    
+
+    // Automatically Click for More
+    $(window).scroll(function() {
+      $("div.game-pagination div a")[0].click();
+    });
+
 /* jshint ignore:start */
 ]]></>).toString();
 var c = Babel.transform(inline_src, { presets: [ "es2015", "es2016" ] });
